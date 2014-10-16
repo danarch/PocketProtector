@@ -1,3 +1,9 @@
+GIT
+  remote: https://github.com/AlchemyAPI/alchemyapi_ruby.git
+  revision: 18cb8e19fcf604b721bcfa8e078f7369c4ddf645
+  specs:
+    alchemyapi_ruby (0.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -219,6 +225,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  alchemyapi_ruby (= 0.0)!
   better_errors
   binding_of_caller
   cancancan
