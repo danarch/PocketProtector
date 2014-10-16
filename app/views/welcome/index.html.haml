@@ -1,0 +1,8 @@
+%h2 All Articles
+
+%ul.media-list
+  - @articles.each do |article|
+    %li.media
+      .media-body
+        %h4.media-heading= article.title
+        %p= article.excerpt
