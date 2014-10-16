@@ -18,6 +18,7 @@ gem 'devise'
 gem 'omniauth'
 gem 'omniauth-pocket'
 gem 'getpocket'
+gem 'figaro'
 
 group :development do
   gem 'better_errors'

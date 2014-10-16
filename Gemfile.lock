@@ -71,6 +71,8 @@ GEM
       railties (>= 3.0.0)
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
+    figaro (1.0.0)
+      thor (~> 0.14)
     getpocket (0.0.5)
       httparty
     haml (4.0.5)
@@ -224,6 +226,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   devise
   factory_girl_rails
+  figaro
   getpocket
   haml-rails
   jbuilder (~> 2.0)
