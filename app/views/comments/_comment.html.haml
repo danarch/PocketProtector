@@ -1,0 +1,9 @@
+%p
+  %strong Comment:
+  = comment.body
+
+%p
+  - if current_user[:id] == comment[:user_id]
+    = link_to 'Delete', [comment.article, comment],
+              method: :delete,
+              data: { confirm: 'Are you sure?' }

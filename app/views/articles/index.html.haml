@@ -1,0 +1,11 @@
+%h1 All Discussions
+
+%ul.media-list
+- @articles.each do |article|
+  %li.media
+  .media-body
+    %h2.media-heading= link_to article.title, article_path(article)
+    %p= article.excerpt
+    %ul.media-list
+    - article.concepts.each do |concept|
+      %h4.small= concept["text"]

@@ -1,8 +1,3 @@
-%h2 All Articles
+%h1 Welcome to Your Pocket Protector!
 
-%ul.media-list
-  - @articles.each do |article|
-    %li.media
-      .media-body
-        %h4.media-heading= article.title
-        %p= article.excerpt
+= link_to 'View untagged articles', controller: 'articles'
