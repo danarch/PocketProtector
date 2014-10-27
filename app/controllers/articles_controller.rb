@@ -7,19 +7,19 @@ class ArticlesController < ApplicationController
 
   def index
     PocketApi.configure(:client_key => ENV["POCKET_APP_ID"], :access_token => current_user.token)
-    articles = PocketApi.retrieve({:state => 'all', :tag => '_untagged_', :contentType => 'article', :detailType => "complete"})
-    articles.each do |pocket|
-      article = current_user.articles.find_or_create_by(item_id: pocket[1]["item_id"]) do
-        article.title = pocket[1]["resolved_title"]
-        article.excerpt = pocket[1]["excerpt"]
-        article.url = pocket[1]["resolved_url"]
-        article.alchemy.concepts('url', article.url)["concepts"].each do |concept|
-          tag = article.concepts.new
-          tag.tag = concept["text"]
-          tag.save
-        end
-      end
-    end
+    # articles = PocketApi.retrieve({:state => 'all', :tag => '_untagged_', :contentType => 'article', :detailType => "complete"})
+    # articles.each do |pocket|
+    #  article = current_user.articles.find_or_create_by(item_id: pocket[1]["item_id"]) do
+    #    article.title = pocket[1]["resolved_title"]
+    #    article.excerpt = pocket[1]["excerpt"]
+    #    article.url = pocket[1]["resolved_url"]
+    #    article.alchemy.concepts('url', article.url)["concepts"].each do |concept|
+    #      tag = article.concepts.new
+    #      tag.tag = concept["text"]
+    #      tag.save
+    #    end
+    #  end
+    #end
 
     @articles = current_user.articles.includes( :concepts)
   end
