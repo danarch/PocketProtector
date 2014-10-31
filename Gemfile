@@ -30,6 +30,7 @@ group :development do
   gem 'quiet_assets'
   gem 'spring'
   gem 'spring-commands-rspec'
+  gem "erb2haml"
 end
 
 group :development, :test do

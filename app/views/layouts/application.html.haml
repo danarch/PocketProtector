@@ -10,30 +10,28 @@
     = csrf_meta_tags
 
   %body
-    %nav.navbar.navbar-default
-      .container
-        .navbar-header
-          = link_to "PocketProtector", root_path, class: "navbar-brand"
-
-        %ul.nav.navbar-nav
-          / Main links will go here
-
-        %ul.nav.navbar-nav.pull-right
+    .ui.page.grid
+      %nav.ui.secondary.menu.navbar
+        .left.menu
+          %a.item{:href => root_path}
+            = semantic_icon('home')
+            PocketProtector
+        .right.menu
           - if current_user
             / Signed in
-            %li= link_to current_user.email, edit_user_registration_path
-            %li= link_to "Log out", destroy_user_session_path, method: :delete
+            %a.item{:href => edit_user_registration_path}
+              = current_user.email
+            %a.item{:href => destroy_user_session_path, "data-method" => "delete"}
+              Log out
           - else
             / Not signed in
-            %li= link_to "Log in", new_user_session_path
-            %li= link_to "Sign up", new_user_registration_path
+            %a.item{:href => new_user_session_path}
+              Log in
+            %a.item{:href => new_user_registration_path}
+              Sign up
 
-    .container
-      .flash
-        - flash.each do |name, msg|
-          %div{ :class => "alert alert-#{flash_class name}" }
-            %a.close{ "data-dismiss" => "alert" } &times;
-            %div{ :id => "flash_#{flash_class name}" }
-              = msg
-
-      = yield
+      .ui.grid
+        .row
+          .column
+            = semantic_flash
+            = yield
