@@ -10,28 +10,34 @@
     = csrf_meta_tags
 
   %body
-    .ui.page.grid
-      %nav.ui.secondary.menu.navbar
-        .left.menu
-          %a.item{:href => root_path}
-            = semantic_icon('home')
-            PocketProtector
-        .right.menu
-          - if current_user
-            / Signed in
-            %a.item{:href => edit_user_registration_path}
-              = current_user.email
-            %a.item{:href => destroy_user_session_path, "data-method" => "delete"}
-              Log out
-          - else
-            / Not signed in
-            %a.item{:href => new_user_session_path}
-              Log in
-            %a.item{:href => new_user_registration_path}
-              Sign up
-
-      .ui.grid
-        .row
+    %nav.ui.secondary.pointing.menu
+      .ui.page.grid
+        .one.column.row
           .column
-            = semantic_flash
-            = yield
+            .left.menu
+              %a.item{:href => root_path}
+                %i.home.icon
+                PocketProtector
+            .right.menu
+              - if current_user
+                / Signed in
+                %a.item{:href => edit_user_registration_path}
+                  = current_user.email
+                %a.item{:href => destroy_user_session_path, "data-method" => "delete"}
+                  Log out
+              - else
+                / Not signed in
+                %a.item{:href => new_user_session_path}
+                  Log in
+                %a.item{:href => new_user_registration_path}
+                  Sign up
+
+    .ui.page.grid
+      .one.column.row
+        .column
+          - flash.each do |name, msg|
+            %div{ :class => "ui #{flash_class name} message closable" }
+              %i.close.icon
+              %div
+                = msg
+          = yield
