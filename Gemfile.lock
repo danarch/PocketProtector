@@ -1,3 +1,9 @@
+GIT
+  remote: https://github.com/AlchemyAPI/alchemyapi_ruby.git
+  revision: 18cb8e19fcf604b721bcfa8e078f7369c4ddf645
+  specs:
+    alchemyapi_ruby (0.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -29,6 +35,9 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.3.6)
     arel (5.0.1.20140414130214)
+    autoprefixer-rails (5.1.7)
+      execjs
+      json
     bcrypt (3.1.7)
     better_errors (2.0.0)
       coderay (>= 1.0.0)
@@ -52,6 +61,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.8.0)
+    commonjs (0.2.7)
     debug_inspector (0.0.2)
     devise (3.4.0)
       bcrypt (~> 3.0)
@@ -62,6 +72,8 @@ GEM
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
     docile (1.1.5)
+    erb2haml (0.1.5)
+      html2haml
     erubis (2.7.0)
     execjs (2.2.2)
     factory_girl (4.4.0)
@@ -84,6 +96,12 @@ GEM
       railties (>= 4.0.1)
     hashie (3.3.1)
     hike (1.2.3)
+    hpricot (0.8.6)
+    html2haml (1.0.1)
+      erubis (~> 2.7.0)
+      haml (>= 4.0.0.rc.1)
+      hpricot (~> 0.8.6)
+      ruby_parser (~> 3.1.1)
     httparty (0.13.1)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
@@ -98,6 +116,14 @@ GEM
     jwt (1.0.0)
     launchy (2.4.2)
       addressable (~> 2.3)
+    less (2.6.0)
+      commonjs (~> 0.2.7)
+    less-rails (2.6.0)
+      actionpack (>= 3.1)
+      less (~> 2.6.0)
+    less-rails-semantic_ui (1.11.4.0)
+      less-rails (~> 2.6.0, >= 2.6.0)
+    libv8 (3.16.14.7)
     mail (2.6.1)
       mime-types (>= 1.16, < 3)
     method_source (0.8.2)
@@ -156,6 +182,7 @@ GEM
     rake (10.3.2)
     rdoc (4.1.2)
       json (~> 1.4)
+    ref (1.0.5)
     responders (1.1.1)
       railties (>= 3.2, < 4.2)
     rspec-core (3.1.7)
@@ -174,6 +201,8 @@ GEM
       rspec-mocks (~> 3.1.0)
       rspec-support (~> 3.1.0)
     rspec-support (3.1.2)
+    ruby_parser (3.1.3)
+      sexp_processor (~> 4.1)
     sass (3.2.19)
     sass-rails (4.0.3)
       railties (>= 4.0.0, < 5.0)
@@ -183,6 +212,7 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    sexp_processor (4.4.4)
     simplecov (0.9.1)
       docile (~> 1.1.0)
       multi_json (~> 1.0)
@@ -202,6 +232,9 @@ GEM
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
     sqlite3 (1.3.9)
+    therubyracer (0.12.1)
+      libv8 (~> 3.16.14.0)
+      ref
     thor (0.19.1)
     thread_safe (0.3.4)
     tilt (1.4.1)
@@ -219,12 +252,15 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  alchemyapi_ruby (= 0.0)!
+  autoprefixer-rails
   better_errors
   binding_of_caller
   cancancan
   capybara
   coffee-rails (~> 4.0.0)
   devise
+  erb2haml
   factory_girl_rails
   figaro
   getpocket
@@ -232,6 +268,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   launchy
+  less-rails-semantic_ui
   omniauth
   omniauth-pocket
   pry-rails
@@ -244,4 +281,5 @@ DEPENDENCIES
   spring
   spring-commands-rspec
   sqlite3
+  therubyracer
   uglifier (>= 1.3.0)

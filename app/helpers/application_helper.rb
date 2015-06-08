@@ -2,10 +2,12 @@ module ApplicationHelper
   def flash_class name
     # Translate rails conventions to bootstrap conventions
     case name.to_sym
-    when :notice
-      :success
+    when :success
+      "green"
     when :alert
-      :error
+      "red"
+    when :notice
+      "blue"
     else
       name
     end

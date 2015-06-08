@@ -1,0 +1,28 @@
+%h1
+  %strong Title:
+  = @article.title
+
+%p
+  %strong Text:
+  = @article.excerpt
+
+
+%h2 Concepts
+
+%p
+  = render @article.concepts
+
+
+%h3 Add a comment
+
+%p
+  = render "comments/form"
+
+- if current_user.votes.where(article: @article).exists?
+  = link_to "Unvote", unvote_article_path(@article), method: :patch
+- else
+  = link_to "Vote for topic", vote_article_path(@article), method: :patch
+= link_to 'Back', articles_path, class: "btn btn-default"
+
+
+= link_to 'Edit', edit_article_path(@article), class: "btn btn-default"
