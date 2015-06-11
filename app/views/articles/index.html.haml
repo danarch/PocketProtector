@@ -1,11 +1,15 @@
 %h1 All Discussions
+= form_tag(articles_path, method: :get, id: :search_form, class: 'form-search') do
+  = search_field_tag "search", params[:search], class: "form-control"
+  = submit_tag 'search', class: "button"
 
-.ui.items
-- @articles.each do |article|
-  - color = ["orange","red", "purple","blue", "teal", "green"].sample
-  %div{ :class => "ui #{color} segment" }
-    .item
-      %h2.name= link_to article.title, article_path(article)
-      %p.description= article.excerpt
-      .extra
-        - article.concepts.count
+.ui.cards.items
+  - @articles.each do |article|
+    - color = ["orange","red", "purple","blue", "teal", "green"].sample
+    %div{ :class => "#{color} card" }
+      .content
+        %h2.header= link_to article.title, article_path(article)
+        .description= article.excerpt
+      .extra.content
+        - article.concepts.each do |c|
+          = link_to c.tag, articles_path

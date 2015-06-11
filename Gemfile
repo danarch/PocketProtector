@@ -23,6 +23,8 @@ gem 'omniauth-pocket'
 gem 'getpocket'
 gem 'figaro'
 gem 'alchemyapi_ruby', '0.0', :git => 'https://github.com/AlchemyAPI/alchemyapi_ruby.git'
+gem 'pg'
+gem 'pg_search'
 
 
 group :development do

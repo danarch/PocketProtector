@@ -5,6 +5,7 @@ require 'alchemyapi'
 class ArticlesController < ApplicationController
   before_action :authenticate_user!
 
+
   def index
     PocketApi.configure(:client_key => ENV["POCKET_APP_ID"], :access_token => current_user.token)
      articles = PocketApi.retrieve({:state => 'all', :contentType => 'article', :detailType => "complete"})
@@ -20,8 +21,11 @@ class ArticlesController < ApplicationController
         end
       end
     end
-
-    @articles = current_user.articles.includes( :concepts)
+    if params[:search]
+      @articles = current_user.articles.search_for_articles( params[:search])
+    else
+      @articles = current_user.articles.includes( :concepts)
+    end
   end
 
   def show
