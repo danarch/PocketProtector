@@ -45,19 +45,6 @@ class ArticlesController < ApplicationController
     end
   end
 
-  def vote
-    @article = Article.find(params[:id])
-    current_user.votes.create! article: @article
-    redirect_to :back
-  end
-
-  def unvote
-    @article = Article.find(params[:id])
-    @vote = current_user.votes.find(@article)
-    @vote.destroy
-    redirect_to @article
-  end
-
   def destroy
     @article = Article.find(params[:id])
     @article.destroy

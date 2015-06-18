@@ -32,13 +32,13 @@ group :development do
   gem 'binding_of_caller'
   gem 'pry-rails'
   gem 'quiet_assets'
-  gem 'spring'
+  #gem 'spring'
   gem 'spring-commands-rspec'
   gem "erb2haml"
 end
 
 group :development, :test do
-  gem 'sqlite3'
+  #gem 'sqlite3'
   gem 'factory_girl_rails', require: false
   gem 'rspec-rails'
 end
