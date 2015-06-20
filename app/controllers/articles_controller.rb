@@ -5,7 +5,7 @@ require 'alchemyapi'
 class ArticlesController < ApplicationController
   before_action :authenticate_user!
 
-  def index
+  def retrieve
     PocketApi.configure(:client_key => ENV["POCKET_APP_ID"], :access_token => current_user.token)
      articles = PocketApi.retrieve({:state => 'all', :contentType => 'article', :detailType => "complete"})
      articles.each do |pocket|
@@ -20,8 +20,27 @@ class ArticlesController < ApplicationController
         end
       end
     end
+    redirect_to articles_path
+  end
 
-    @articles = current_user.articles.includes( :concepts)
+  def tag
+    @article = Article.find(params[:id])
+    PocketApi.configure(:client_key => ENV["POCKET_APP_ID"], :access_token => current_user.token)
+    tags = []
+    @article.concepts.each do |c|
+      tags.append(c.tag)
+    end
+    PocketApi.modify("favorite", {:item_id=>@article.item_id})
+    @article.destroy
+    redirect_to articles_path
+  end
+
+  def index
+    if params[:search]
+      @articles = current_user.articles.search_for_articles( params[:search])
+    else
+      @articles = current_user.articles.includes( :concepts)
+    end
   end
 
   def show
@@ -39,19 +58,6 @@ class ArticlesController < ApplicationController
     else
       render 'edit'
     end
-  end
-
-  def vote
-    @article = Article.find(params[:id])
-    current_user.votes.create! article: @article
-    redirect_to :back
-  end
-
-  def unvote
-    @article = Article.find(params[:id])
-    @vote = current_user.votes.find(@article)
-    @vote.destroy
-    redirect_to @article
   end
 
   def destroy

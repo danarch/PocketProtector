@@ -5,7 +5,7 @@ class CreateArticles < ActiveRecord::Migration
       t.string :item_id
       t.string :title
       t.text :excerpt
-      t.string :url
+      t.text :url
 
       t.timestamps
     end
