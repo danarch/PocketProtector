@@ -1,0 +1,18 @@
+%h1 All Discussions
+.row
+  = form_tag(articles_path, method: :get, id: :search_form, class: "ui action left icon input pull left") do
+    %i.search.icon
+    = text_field_tag 'search', params[:search], placeholder: "Search..."
+    = button_tag 'search', class: "ui teal button"
+
+  = button_to "Retrieve Articles", retrieve_articles_path, class: "ui blue button pull right"
+.ui.cards.items
+  - @articles.each do |article|
+    - color = ["orange","red", "purple","blue", "teal", "green"].sample
+    %div{ :class => "#{color} card" }
+      .content
+        %h2.header= link_to article.title, article_path(article)
+        .description= article.excerpt
+      .extra.content
+        - article.concepts.each do |c|
+          = link_to c.tag, articles_path(:search => "#{c.tag}")

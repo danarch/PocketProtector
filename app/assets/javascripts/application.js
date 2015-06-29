@@ -12,4 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require semantic_ui/semantic_ui
 //= require_tree .
+
+$ ->
+  $(".message.closable .close.icon").on "click", ->
+    $('.message.closable').fadeOut("slow")
+    false
