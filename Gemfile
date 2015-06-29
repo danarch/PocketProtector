@@ -17,7 +17,7 @@ gem 'cancancan'
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-pocket'
-gem 'getpocket'
+gem 'pocket-ruby'
 gem 'figaro'
 
 group :development do
