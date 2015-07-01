@@ -38,7 +38,7 @@ class ArticlesController < ApplicationController
       tags.append(c.tag)
     end
     client.modify([{:action => "tags_add", :item_id => @article.item_id, :tags => tags.join(", ")}])
-    ## @article.destroy
+    @article.destroy
     redirect_to articles_path
   end
 
