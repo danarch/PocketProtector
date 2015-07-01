@@ -1,14 +1,18 @@
-require 'pocket_api'
+require 'pocket-ruby'
 require 'alchemyapi'
 
 
 class ArticlesController < ApplicationController
   before_action :authenticate_user!
 
+
   def retrieve
-    PocketApi.configure(:client_key => ENV["POCKET_APP_ID"], :access_token => current_user.token)
-     articles = PocketApi.retrieve({:state => 'all', :contentType => 'article', :detailType => "complete"})
-     articles.each do |pocket|
+    Pocket.configure do |config|
+      config.consumer_key = ENV["POCKET_APP_ID"]
+    end
+    client = Pocket.client(:access_token => current_user.token)
+    articles = client.retrieve({:state => 'all', :contentType => 'article', :detailType => "complete"})
+    articles["list"].each do |pocket|
       article = current_user.articles.find_or_create_by(item_id: pocket[1]["item_id"]) do |article|
         article.title = pocket[1]["resolved_title"]
         article.excerpt = pocket[1]["excerpt"]
@@ -24,14 +28,17 @@ class ArticlesController < ApplicationController
   end
 
   def tag
+    Pocket.configure do |config|
+      config.consumer_key = ENV["POCKET_APP_ID"]
+    end
+    client = Pocket.client(:access_token => current_user.token)
     @article = Article.find(params[:id])
-    PocketApi.configure(:client_key => ENV["POCKET_APP_ID"], :access_token => current_user.token)
     tags = []
     @article.concepts.each do |c|
       tags.append(c.tag)
     end
-    PocketApi.modify("favorite", {:item_id=>@article.item_id})
-    @article.destroy
+    client.modify([{:action => "tags_add", :item_id => @article.item_id, :tags => tags.join(", ")}])
+    ## @article.destroy
     redirect_to articles_path
   end
 
