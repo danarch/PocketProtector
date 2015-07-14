@@ -2,16 +2,21 @@
   %strong
   = link_to @article.title, @article.url
 
-%p= @article.excerpt
+.ui.segment
+
+  =image_tag(@article.image, class:"ui large left floated image")
+
+  %p= @article.excerpt
 
 
-%h3 Concepts
+  %h3 Concepts
 
-- @article.concepts.each do |c|
-  = link_to c.tag
+  - @article.concepts.each do |c|
+    .ui.small.basic.button
+      = best_in_place c, :tag, :as => :input, :url => concept_path(id: c.id)
 
-.ui.hidden.divider
+  .ui.hidden.divider
 
-= link_to 'Tag', tag_article_path, class: "ui green button"
-//= link_to 'Edit', edit_article_path(@article), class: "ui teal button"
-= link_to 'Back', articles_path, class: "ui blue button"
+  = link_to 'Tag', tag_article_path, class: "ui green button"
+  //= link_to 'Edit', edit_article_path(@article), class: "ui teal button"
+  = link_to 'Back', articles_path, class: "ui blue button"
