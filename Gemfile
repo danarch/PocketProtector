@@ -14,6 +14,7 @@ gem 'therubyracer'
 
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
+gem 'best_in_place', '~> 3.0.1'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'cancancan'

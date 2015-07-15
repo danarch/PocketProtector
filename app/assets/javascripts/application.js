@@ -11,11 +11,18 @@
 // about supported directives.
 //
 //= require jquery
+//= require best_in_place
 //= require jquery_ujs
 //= require semantic_ui/semantic_ui
 //= require_tree .
 
-$ ->
-  $(".message.closable .close.icon").on "click", ->
-    $('.message.closable').fadeOut("slow")
-    false
+$(document).ready(function() {
+  $('.message .close')
+    .on('click', function() {
+      $(this)
+        .closest('.message')
+        .transition('fade')
+      ;
+    })
+  ;
+});
