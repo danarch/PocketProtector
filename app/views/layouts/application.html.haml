@@ -10,34 +10,31 @@
     = csrf_meta_tags
 
   %body
-    %nav.ui.secondary.pointing.menu
-      .ui.page.grid
-        .one.column.row
-          .column
-            .left.menu
-              %a.item{:href => root_path}
-                %i.home.icon
-                PocketProtector
-            .right.menu
-              - if current_user
-                / Signed in
-                %a.item{:href => edit_user_registration_path}
-                  = current_user.email
-                %a.item{:href => destroy_user_session_path, "data-method" => "delete"}
-                  Log out
-              - else
-                / Not signed in
-                %a.item{:href => new_user_session_path}
-                  Log in
-                %a.item{:href => new_user_registration_path}
-                  Sign up
+    %nav.ui.small.secondary.pointing.menu
+      .ui.container
+        .left.item
+          %a.item{:href => root_path}
+            %i.home.icon
+            PocketProtector
+        .right.item
+          - if current_user
+            / Signed in
+            %a.item{:href => edit_user_registration_path}
+              = current_user.email
+            %a.item{:href => destroy_user_session_path, "data-method" => "delete"}
+              Log out
+          - else
+            / Not signed in
+            %a.item{:href => new_user_session_path}
+              Log in
+            %a.item{:href => new_user_registration_path}
+              Sign up
 
-    .ui.page.grid
-      .one.column.row
-        .column
-          - flash.each do |name, msg|
-            %div{ :class => "ui #{flash_class name} message closable" }
-              %i.close.icon
-              %div
-                = msg
-          = yield
+    .ui.grid.container
+      .column
+        - flash.each do |name, msg|
+          %div{ :class => "ui #{flash_class name} message closable" }
+            %i.close.icon
+            %div
+              = msg
+        = yield

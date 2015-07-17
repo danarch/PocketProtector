@@ -1,18 +1,18 @@
 %h1= link_to "All Discussions", articles_path
+.ui.borderless.text.menu
+  .left.floated.item
+    = form_tag(articles_path, method: :get, id: :search_form, class: "ui action left icon input") do
+      %i.search.icon
+      = text_field_tag 'search', params[:search], placeholder: "Concept search..."
+      = button_tag 'Search', class: "ui teal button"
+  .right.floated.item
+    = button_to "Retrieve Articles", retrieve_articles_path, class: "ui blue button"
 .ui.grid
-  .four.column.row
-    .left.floated.column
-      = form_tag(articles_path, method: :get, id: :search_form, class: "ui action left icon input") do
-        %i.search.icon
-        = text_field_tag 'search', params[:search], placeholder: "Concept search..."
-        = button_tag 'Search', class: "ui teal button"
-    .right.floated.column
-      = button_to "Retrieve Articles", retrieve_articles_path, class: "ui blue button"
   .one.column.row
     .column
-      .ui.cards.items
+      .ui.cards.centered
         - @articles.each do |article|
-          - color = ["orange","red", "yellow", "purple","blue", "teal", "green"].sample
+          - color = ["red","orange", "yellow", "olive", "green","teal", "blue","violet","purple","pink"].sample
           %div{ :class => "#{color} card" }
             .content
               %h2.header= link_to article.title, article_path(article)

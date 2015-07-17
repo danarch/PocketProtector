@@ -1,22 +1,21 @@
-%h1
-  %strong
-  = link_to @article.title, @article.url
 
-.ui.segment
+.ui.container.segment
+  %h1.ui.header
+    = @article.title
+  .ui.equal.width.grid
+    -if @article.image
+      .column
+        =image_tag(@article.image, class:"ui fluid left floated rounded image")
+    .column
+      %p= @article.excerpt
+      %p= link_to "Read more ...", @article.url
+      %h3 Concepts
+      .ui.horizontal.list
+        - @article.concepts.each do |c|
+          .ui.item
+            = best_in_place c, :tag, :as => :input, :url => concept_path(id: c.id), :class => "ui small basic button"
 
-  =image_tag(@article.image, class:"ui large left floated image")
+      .ui.hidden.divider
 
-  %p= @article.excerpt
-  %p= link_to "Read more ..."
-
-
-  %h3 Concepts
-
-  - @article.concepts.each do |c|
-    = best_in_place c, :tag, :as => :input, :url => concept_path(id: c.id), :class => "ui small input"
-
-  .ui.hidden.divider
-
-  = link_to 'Tag', tag_article_path, class: "ui green button"
-  //= link_to 'Edit', edit_article_path(@article), class: "ui teal button"
-  = link_to 'Back', articles_path, class: "ui blue button"
+      = link_to 'Tag', tag_article_path, class: "ui green button"
+      = link_to 'Back', articles_path, class: "ui blue button"
