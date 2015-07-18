@@ -21,7 +21,7 @@ class ArticlesController < ApplicationController
         if pocket[1]["image"]
           article.image = pocket[1]["image"]["src"]
         end
-        article.text = article.alchemy.text('url', article.url)["text"]
+        ##article.text = article.alchemy.text('url', article.url)["text"]
         article.alchemy.concepts('url', article.url)["concepts"].each do |concept|
           tag = article.concepts.new
           tag.tag = concept["text"]
