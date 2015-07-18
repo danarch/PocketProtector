@@ -37,6 +37,7 @@ group :development do
   #gem 'spring'
   gem 'spring-commands-rspec'
   gem "erb2haml"
+  gem "rename"
 end
 
 group :development, :test do
