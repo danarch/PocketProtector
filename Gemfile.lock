@@ -65,6 +65,8 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    celluloid (0.16.0)
+      timers (~> 4.0.0)
     coderay (1.1.0)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
@@ -74,6 +76,7 @@ GEM
       execjs
     coffee-script-source (1.9.1.1)
     commonjs (0.2.7)
+    connection_pool (2.2.0)
     debug_inspector (0.0.2)
     devise (3.5.1)
       bcrypt (~> 3.0)
@@ -111,6 +114,7 @@ GEM
       railties (>= 4.0.1)
     hashie (3.4.2)
     hike (1.2.3)
+    hitimes (1.2.2)
     html2haml (2.0.0)
       erubis (~> 2.7.0)
       haml (~> 4.0.0)
@@ -220,6 +224,9 @@ GEM
     rake (10.4.2)
     rdoc (4.2.0)
       json (~> 1.4)
+    redis (3.2.1)
+    redis-namespace (1.5.2)
+      redis (~> 3.0, >= 3.0.4)
     ref (2.0.0)
     rename (1.0.2)
       rails (>= 3.0.0)
@@ -254,6 +261,12 @@ GEM
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
     sexp_processor (4.6.0)
+    sidekiq (3.4.2)
+      celluloid (~> 0.16.0)
+      connection_pool (~> 2.2, >= 2.2.0)
+      json (~> 1.0)
+      redis (~> 3.2, >= 3.2.1)
+      redis-namespace (~> 1.5, >= 1.5.2)
     simplecov (0.10.0)
       docile (~> 1.1.0)
       json (~> 1.8)
@@ -278,6 +291,8 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (1.4.1)
+    timers (4.0.1)
+      hitimes
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (2.7.1)
@@ -322,6 +337,7 @@ DEPENDENCIES
   rspec-rails
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
+  sidekiq
   simplecov
   spring-commands-rspec
   therubyracer

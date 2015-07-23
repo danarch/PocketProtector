@@ -13,22 +13,7 @@ class ArticlesController < ApplicationController
     end
     client = Pocket.client(:access_token => current_user.token)
     articles = client.retrieve({:state => 'all', :tag => '_untagged_', :contentType => 'article', :sort => 'newest', :detailType => "complete"})
-    articles["list"].each do |pocket|
-      article = current_user.articles.find_or_create_by(item_id: pocket[1]["item_id"]) do |article|
-        article.title = pocket[1]["resolved_title"]
-        article.excerpt = pocket[1]["excerpt"]
-        article.url = pocket[1]["resolved_url"]
-        if pocket[1]["image"]
-          article.image = pocket[1]["image"]["src"]
-        end
-        ##article.text = article.alchemy.text('url', article.url)["text"]
-        article.alchemy.concepts('url', article.url)["concepts"].each do |concept|
-          tag = article.concepts.new
-          tag.tag = concept["text"]
-          tag.save
-        end
-      end
-    end
+    ImportArticles.perform_async(articles, articles.count)
     redirect_to articles_path
   end
 
