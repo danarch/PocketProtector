@@ -30,6 +30,7 @@ gem 'alchemyapi_ruby', '0.0', :git => 'https://github.com/AlchemyAPI/alchemyapi_
 gem 'pg'
 gem 'pg_search'
 gem 'rails_12factor', '0.0.2'
+gem 'puma'
 
 
 group :development do

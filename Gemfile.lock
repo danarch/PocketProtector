@@ -191,6 +191,7 @@ GEM
       slop (~> 3.4)
     pry-rails (0.3.4)
       pry (>= 0.9.10)
+    puma (2.12.2)
     quiet_assets (1.1.0)
       railties (>= 3.1, < 5.0)
     rack (1.6.4)
@@ -326,6 +327,7 @@ DEPENDENCIES
   pocket-ruby
   progress_job
   pry-rails
+  puma
   quiet_assets
   rails
   rails_12factor (= 0.0.2)
