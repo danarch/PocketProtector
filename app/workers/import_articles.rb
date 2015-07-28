@@ -1,9 +1,9 @@
 class ImportArticles
-  include Sidekiq::Worker
 
-  def perform(articles, count)
+  def perform(articles, user_id)
     articles["list"].each do |pocket|
-      article = current_user.articles.find_or_create_by(item_id: pocket[1]["item_id"]) do |article|
+      user = User.find_by_id(user_id)
+      article = user.articles.find_or_create_by(item_id: pocket[1]["item_id"]) do |article|
         article.title = pocket[1]["resolved_title"]
         article.excerpt = pocket[1]["excerpt"]
         article.url = pocket[1]["resolved_url"]

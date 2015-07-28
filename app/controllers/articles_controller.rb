@@ -1,5 +1,4 @@
 require 'pocket-ruby'
-require 'alchemyapi'
 
 
 class ArticlesController < ApplicationController
@@ -13,8 +12,7 @@ class ArticlesController < ApplicationController
     end
     client = Pocket.client(:access_token => current_user.token)
     articles = client.retrieve({:state => 'all', :tag => '_untagged_', :contentType => 'article', :sort => 'newest', :detailType => "complete"})
-    ImportArticles.perform_async(articles, articles.count)
-    redirect_to articles_path
+    @job = Delayed::Job.enqueue ImportArticles.new(articles, current_user.id)
   end
 
   def tag
