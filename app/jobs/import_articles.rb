@@ -34,8 +34,4 @@ class ImportArticles < ProgressJob::Base
     end
   end
 
-  def after(job)
-    binding.pry
-  end
-
 end

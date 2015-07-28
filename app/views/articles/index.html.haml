@@ -6,15 +6,17 @@
       = text_field_tag 'search', params[:search], placeholder: "Concept search..."
       = button_tag 'Search', class: "ui teal button"
   .right.floated.item
-    = button_to 'Retrieve Articles', retrieve_articles_path, remote: true, class: 'ui blue button'
+    = button_to 'Retrieve Articles', retrieve_articles_path, remote: true, class: 'ui blue button', id: 'retrieve_articles'
+    = link_to 'Reload Articles', articles_path, class: 'ui green button', id: 'reload_articles', style: "display:none"
 .ui.grid
   .one.column.row
     .column
       .import.segment{style: "display:none"}
-        .ui.indicating.progress.active#import
+        .ui.blue.progress.active#import
           .bar{:style => "transition-duration: 300ms"}
             .progress#text 0%
           .label Importing Articles
+      .ui.hidden.divider
       .ui.cards.centered
         - @articles.each do |article|
           - color = ["red","orange", "yellow", "olive", "green","teal", "blue","violet","purple","pink"].sample

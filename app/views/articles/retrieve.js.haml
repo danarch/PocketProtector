@@ -1,6 +1,7 @@
 :plain
   var interval;
   $('.import.segment').show();
+  $('#retrieve_articles').hide();
   interval = setInterval(function(){
     $.ajax({
       url: '/progress-job/' + #{@job.id},
@@ -15,7 +16,7 @@
         }
 
         progress = job.progress_current / job.progress_max * 100;
-        progress = progress.toFixed(2);
+        progress = progress.toFixed(0);
         if (progress.toString() !== 'NaN'){
           $('.label').text(job.progress_current + '/' + job.progress_max);
           $('.bar').css('width', progress + '%')
@@ -24,9 +25,12 @@
       },
       error: function(){
         $('#import').removeClass('active');
+        $('#import').removeClass('blue');
+        $('#import').addClass('green');
         $('.bar').css('width', '100%')
         $('#text').text('100%');
         $('.label').text('Successfully imported!');
+        $('#reload_articles').show();
         clearInterval(interval);
       }
     })
